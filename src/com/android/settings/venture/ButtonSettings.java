@@ -32,11 +32,14 @@ public class ButtonSettings extends SettingsPreferenceFragment implements OnPref
     private static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
     private static final String VOLUME_KEY_ADJUST_SOUND = "volume_key_adjust_sound";
     private static final String KEY_SWAP_VOLUME_BUTTONS = "swap_volume_buttons";
+    private static final String KEY_ADVANCED_REBOOT = "advanced_reboot";
+
+    private PreferenceGroup mPowerMenuCategory;
 
     private ListPreference mVolumeKeyCursorControl;
     private SwitchPreference mVolumeKeyAdjustSound;
     private SwitchPreference mSwapVolumeButtons;
-
+    private ListPreference mAdvancedReboot;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +63,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements OnPref
                     Settings.System.SWAP_VOLUME_KEYS_ON_ROTATION, 0);
         mSwapVolumeButtons = (SwitchPreference) findPreference(KEY_SWAP_VOLUME_BUTTONS);
         mSwapVolumeButtons.setChecked(swapVolumeKeys > 0);
+
+        mAdvancedReboot = (ListPreference) findPreference(KEY_ADVANCED_REBOOT);
+        mAdvancedReboot.setValue(String.valueOf(Settings.Secure.getInt(
+                getContentResolver(), Settings.Secure.ADVANCED_REBOOT, 0)));
+        mAdvancedReboot.setSummary(mAdvancedReboot.getEntry());
+        mAdvancedReboot.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -77,6 +86,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements OnPref
             Settings.System.putInt(getContentResolver(), VOLUME_KEY_ADJUST_SOUND,
                     value ? 1: 0);
             return true;
+        } else if (preference == mAdvancedReboot) {
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.ADVANCED_REBOOT,
+                    Integer.valueOf((String) value));
+            mAdvancedReboot.setValue(String.valueOf(value));
+            mAdvancedReboot.setSummary(mAdvancedReboot.getEntry());
         }
         return false;
     }
