@@ -16,8 +16,9 @@
 package com.android.settings.venture;
 
 import android.content.ContentResolver;
-import android.database.ContentObserver;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.Handler;
@@ -67,6 +68,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     private static final String NETWORK_TRAFFIC_AUTOHIDE = "network_traffic_autohide";
     private static final String NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD = "network_traffic_autohide_threshold";
 
+    // Heads up
+    private static final String KEY_STATUS_BAR_TICKER = "status_bar_ticker_enabled";
+
     // General
     private PreferenceCategory mStatusBarGeneralCategory;
 
@@ -92,6 +96,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     private int MASK_UNIT;
     private int MASK_PERIOD;
 
+    // Heads up
+    private SwitchPreference mTicker;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +108,15 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
         PreferenceScreen prefSet = getPreferenceScreen();
         ContentResolver resolver = getActivity().getContentResolver();
+
+        PackageManager pm = getPackageManager();
+        Resources systemUiResources;
+        try {
+            systemUiResources = pm.getResourcesForApplication("com.android.systemui");
+        } catch (Exception e) {
+            Log.e(TAG, "can't access systemui resources",e);
+            return;
+        }
 
         // General category
         mStatusBarGeneralCategory = (PreferenceCategory) findPreference(STATUS_BAR_GENERAL_CATEGORY);
@@ -118,6 +134,13 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
         mStatusBarBatteryShowPercent.setValue(String.valueOf(batteryShowPercent));
         mStatusBarBatteryShowPercent.setSummary(mStatusBarBatteryShowPercent.getEntry());
         mStatusBarBatteryShowPercent.setOnPreferenceChangeListener(this);
+
+        mTicker = (SwitchPreference) prefSet.findPreference(KEY_STATUS_BAR_TICKER);
+        final boolean tickerEnabled = systemUiResources.getBoolean(systemUiResources.getIdentifier(
+                    "com.android.systemui:bool/enable_ticker", null, null));
+        mTicker.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.STATUS_BAR_TICKER_ENABLED, tickerEnabled ? 1 : 0) == 1);
+        mTicker.setOnPreferenceChangeListener(this);
 
         mQuickPulldown = (ListPreference) prefSet.findPreference(PRE_QUICK_PULLDOWN);
         mSmartPulldown = (ListPreference) prefSet.findPreference(PREF_SMART_PULLDOWN);
@@ -249,7 +272,11 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
                     resolver, Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENT, batteryShowPercent);
             mStatusBarBatteryShowPercent.setSummary(mStatusBarBatteryShowPercent.getEntries()[index]);
             return true;
-        }
+        } else if (preference == mTicker) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.STATUS_BAR_TICKER_ENABLED,
+                    (Boolean) objValue ? 1 : 0);
+            return true;
         return false;
     }
 
