@@ -5986,5 +5986,4 @@
 
     <!-- Toast message when trying to open system app AppOps -->
     <string name="appops_sys_app">Cannot change operations for system apps</string>
-
 </resources>
