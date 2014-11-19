@@ -72,6 +72,9 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
 
     private static final int SAMPLE_CUTOFF = 2000;  // manually cap sample playback at 2 seconds
 
+    // VentureROM Additions
+    private static final String VOLUME_KEY_ADJUST_SOUND = "volume_key_adjust_sound";
+
     private final VolumePreferenceCallback mVolumeCallback = new VolumePreferenceCallback();
     private final H mHandler = new H();
     private final SettingsObserver mSettingsObserver = new SettingsObserver();
@@ -90,6 +93,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private Preference mNotificationAccess;
     private boolean mSecure;
     private int mLockscreenSelectedValue;
+    private SwitchPreference mVolumeKeyAdjustSound;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -125,6 +129,19 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
                 findPreference(KEY_NOTIFICATION);
         initPulse(notification);
         initLockscreenNotifications(notification);
+
+        mVolumeKeyAdjustSound = (SwitchPreference) findPreference(VOLUME_KEY_ADJUST_SOUND);
+        mVolumeKeyAdjustSound.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final boolean val = (Boolean) newValue;
+                return Settings.System.putInt(getContentResolver(),
+                        Settings.System.VOLUME_KEY_ADJUST_SOUND,
+                        val ? 1 : 0);
+            }
+        });
+        mVolumeKeyAdjustSound.setChecked(Settings.System.getInt(getContentResolver(),
+                VOLUME_KEY_ADJUST_SOUND, 1) != 0);
 
         mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
         refreshNotificationListeners();
