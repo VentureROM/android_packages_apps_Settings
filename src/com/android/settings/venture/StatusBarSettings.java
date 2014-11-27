@@ -43,6 +43,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     // Native battery percentage
     private static final String STATUS_BAR_NATIVE_BATTERY_PERCENTAGE = "status_bar_native_battery_percentage";
 
+    // Double tap to sleep
+    private static final String DOUBLE_TAP_TO_SLEEP = "double_tap_sleep_gesture";
+
     // Network traffic
     private static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
     private static final String NETWORK_TRAFFIC_UNIT = "network_traffic_unit";
@@ -55,6 +58,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
     // Native battery percentage
     private CheckBoxPreference mStatusBarNativeBatteryPercentage;
+
+    // Double tap to sleep
+    private CheckBoxPreference mDoubleTapToSleep;
 
     // Network traffic
     private ListPreference mNetTrafficState;
@@ -87,6 +93,13 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
         mStatusBarNativeBatteryPercentage.setChecked((Settings.System.getInt(getActivity()
                 .getApplicationContext().getContentResolver(),
                 Settings.System.STATUS_BAR_NATIVE_BATTERY_PERCENTAGE, 0) == 1));
+
+        // Double tap to sleep
+        mDoubleTapToSleep = (CheckBoxPreference) getPreferenceScreen()
+                .findPreference(DOUBLE_TAP_TO_SLEEP);
+        mDoubleTapToSleep.setChecked((System.System.getInt(getActivity()
+                .getApplicationContext().getContentResolver(),
+                Settings.System.DOUBLE_TAP_TO_SLEEP, 0) == 1));
 
         // Network traffic
         mNetTrafficState = (ListPreference) prefSet.findPreference(NETWORK_TRAFFIC_STATE);
@@ -173,10 +186,15 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         boolean value;
-       if (preference == mStatusBarNativeBatteryPercentage) {
+        if (preference == mStatusBarNativeBatteryPercentage) {
             value = mStatusBarNativeBatteryPercentage.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_NATIVE_BATTERY_PERCENTAGE, value ? 1 : 0);
+            return true;
+        } else if (preference == mDoubleTapToSleep) {
+            value = mDoubleTapToSleep.isChecked();
+            System.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.DOUBLE_TAP_TO_SLEEP, value ? 1 : 0);
             return true;
         }
  		return super.onPreferenceTreeClick(preferenceScreen, preference);
