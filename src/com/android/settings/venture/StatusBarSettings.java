@@ -46,6 +46,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     // General
     private static String STATUS_BAR_GENERAL_CATEGORY = "status_bar_general_category";
 
+    // Battery percentage
+    private static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
+
     // Quick pulldown
     private static final String PRE_QUICK_PULLDOWN = "quick_pulldown";
 
@@ -61,6 +64,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
     // General
     private PreferenceCategory mStatusBarGeneralCategory;
+
+    // Battery percentage
+    private ListPreference mStatusBarBattery;
 
     // Quick pulldown
     ListPreference mQuickPulldown;
@@ -93,12 +99,12 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
         // General category
         mStatusBarGeneralCategory = (PreferenceCategory) findPreference(STATUS_BAR_GENERAL_CATEGORY);
 
-        // Native battery percentage
-        mStatusBarNativeBatteryPercentage = (CheckBoxPreference) getPreferenceScreen()
-                .findPreference(STATUS_BAR_NATIVE_BATTERY_PERCENTAGE);
-        mStatusBarNativeBatteryPercentage.setChecked((Settings.System.getInt(getActivity()
-                .getApplicationContext().getContentResolver(),
-                Settings.System.STATUS_BAR_NATIVE_BATTERY_PERCENTAGE, 0) == 1));
+        mStatusBarBattery = (ListPreference) findPreference(STATUS_BAR_SHOW_BATTERY_PERCENT);
+        int batteryStyle = Settings.System.getInt(
+                resolver, Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENT, 0);
+        mStatusBarBattery.setValue(String.valueOf(batteryStyle));
+        mStatusBarBattery.setSummary(mStatusBarBattery.getEntry());
+        mStatusBarBattery.setOnPreferenceChangeListener(this);
 
         mQuickPulldown = (ListPreference) prefSet.findPreference(PRE_QUICK_PULLDOWN);
         mSmartPulldown = (ListPreference) prefSet.findPreference(PREF_SMART_PULLDOWN);
@@ -165,6 +171,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
+        ContentResolver resolver = getActivity().getContentResolver();
         if (preference == mNetTrafficState) {
             int intState = Integer.valueOf((String)objValue);
             mNetTrafficVal = setBit(mNetTrafficVal, MASK_UP, getBit(intState, MASK_UP));
@@ -212,6 +219,13 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(), Settings.System.QS_SMART_PULLDOWN,
                     smartPulldown);
             updateSmartPulldownSummary(smartPulldown);
+            return true;
+        } else if (preference == mStatusBarBattery) {
+            int batteryStyle = Integer.valueOf((String) newValue);
+            int index = mStatusBarBattery.findIndexOfValue((String) newValue);
+            Settings.System.putInt(
+                    resolver, Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENT, batteryStyle);
+            mStatusBarBattery.setSummary(mStatusBarBattery.getEntries()[index]);
             return true;
         }
         return false;
