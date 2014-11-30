@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD:res/xml/venture_tweaks.xml
 <!--
      Copyright (C) 2014 VentureROM Project
+=======
+<!-- Copyright (C) 2014 Slimroms
+>>>>>>> b50ffab... Settings: add quick pulldown listpreference:res/xml/slim_interface_settings.xml
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.

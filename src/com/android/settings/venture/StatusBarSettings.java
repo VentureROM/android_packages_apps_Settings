@@ -27,7 +27,11 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+
+import com.android.internal.util.venture.DeviceUtils;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -49,6 +53,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     // Double tap to sleep
     private static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
 
+    // Quick pulldown
+    private static final String PRE_QUICK_PULLDOWN = "quick_pulldown";
+
     // Network traffic
     private static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
     private static final String NETWORK_TRAFFIC_UNIT = "network_traffic_unit";
@@ -67,6 +74,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
     // Double tap to sleep
     private CheckBoxPreference mDoubleTapToSleep;
+
+    // Quick pulldown
+    ListPreference mQuickPulldown;
 
     // Network traffic
     private ListPreference mNetTrafficState;
@@ -113,6 +123,18 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
         mDoubleTapToSleep.setChecked((Settings.System.getInt(getActivity()
                 .getApplicationContext().getContentResolver(),
                 Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 0) == 1));
+
+        mQuickPulldown = (ListPreference) findPreference(PRE_QUICK_PULLDOWN);
+        if (!DeviceUtils.isPhone(getActivity())) {
+            prefs.removePreference(mQuickPulldown);
+        } else {
+            // Quick Pulldown
+            mQuickPulldown.setOnPreferenceChangeListener(this);
+            int statusQuickPulldown = Settings.System.getInt(getContentResolver(),
+                    Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN, 1);
+            mQuickPulldown.setValue(String.valueOf(statusQuickPulldown));
+            updateQuickPulldownSummary(statusQuickPulldown);
+        }
 
         // Network traffic
         mNetTrafficState = (ListPreference) prefSet.findPreference(NETWORK_TRAFFIC_STATE);
@@ -176,7 +198,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
             mNetTrafficUnit.setSummary(mNetTrafficUnit.getEntries()[index]);
             return true;
         } else if (preference == mNetTrafficPeriod) {
-            int intState = Integer.valueOf((String)objValue);
+            int intState = Integer.valueOf((String) objValue);
             mNetTrafficVal = setBit(mNetTrafficVal, MASK_PERIOD, false) + (intState << 16);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NETWORK_TRAFFIC_STATE, mNetTrafficVal);
@@ -192,6 +214,13 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
             int threshold = (Integer) objValue;
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD, threshold * 1);
+            return true;
+        } else if (preference == mQuickPulldown) {
+            int statusQuickPulldown = Integer.valueOf((String) objValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN,
+                    statusQuickPulldown);
+            updateQuickPulldownSummary(statusQuickPulldown);
             return true;
         }
         return false;
@@ -229,6 +258,22 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
             mNetTrafficPeriod.setEnabled(true);
             mNetTrafficAutohide.setEnabled(true);
             mNetTrafficAutohideThreshold.setEnabled(true);
+        }
+    }
+
+    private void updateQuickPulldownSummary(int value) {
+        Resources res = getResources();
+
+        if (value == 0) {
+            // quick pulldown deactivated
+            mQuickPulldown.setSummary(res.getString(R.string.quick_pulldown_off));
+        } else {
+            Locale l = Locale.getDefault();
+            boolean isRtl = TextUtils.getLayoutDirectionFromLocale(l) == View.LAYOUT_DIRECTION_RTL;
+            String direction = res.getString(value == 2
+                    ? (isRtl ? R.string.quick_pulldown_right : R.string.quick_pulldown_left)
+                    : (isRtl ? R.string.quick_pulldown_left : R.string.quick_pulldown_right));
+            mQuickPulldown.setSummary(res.getString(R.string.summary_quick_pulldown, direction));
         }
     }
 
