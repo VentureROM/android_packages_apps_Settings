@@ -71,6 +71,20 @@
 
     </dashboard-category>
 
+    <!-- VENTURE ROM -->
+    <dashboard-category
+            android:id="@+id/venture_rom"
+            android:title="@string/venture_rom">
+
+            <dashboard-tile
+                android:id="@+id/venture_tweaks"
+                android:title="@string/venture_tweaks"
+                android:fragment="com.android.settings.venture.VentureTweaks"
+                android:icon="@drawable/ic_settings_development"
+                />
+
+    </dashboard-category>
+
     <!-- DEVICE -->
     <dashboard-category
             android:id="@+id/device_section"

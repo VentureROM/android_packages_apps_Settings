@@ -1,4 +1,5 @@
-<!-- Copyright (C) 2014 Venture ROM Project
+<!--
+     Copyright (C) 2014 VentureROM Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,39 +14,23 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- VentureROM -->
+    <string name="venture_rom">VentureROM</string>
+    <string name="venture_tweaks">Venture Tweaks</string>
 
-    <!-- About phone screen,  setting option name-->
+    <!-- About phone screen, setting option name-->
     <string name="mod_version">VentureROM version</string>
     <string name="mod_version_default">Unknown</string>
 
-    <!-- Navigation Bar -->
-    <string name="navigation_bar_title">Navigation bar</string>
+    <!-- Generic strings -->
+    <string name="general">General</string>
 
-    <!-- Navigation Bar Height -->
-    <string name="navigation_bar_height">Navigation bar height</string>
-    <string name="navigation_bar_height_48">48dp (default)</string>
-    <string name="navigation_bar_height_44">44dp</string>
-    <string name="navigation_bar_height_40">40dp</string>
-    <string name="navigation_bar_height_36">36dp</string>
-    <string name="navigation_bar_height_32">32dp</string>
-    <string name="navigation_bar_height_28">28dp</string>
-    <string name="navigation_bar_height_24">24dp</string>
-    <string name="navigation_bar_height_20">20dp</string>
-    <string name="navigation_bar_height_0">0dp (hide)</string>
-
-    <!-- Statusbar native battery percent -->
-    <string name="general_string">General</string>
+    <!-- Statusbar settings -->
     <string name="status_bar_title">Status bar</string>
+
+    <!-- Battery settings -->
     <string name="status_bar_native_battery_percentage_title">Battery percentage</string>
     <string name="status_bar_native_battery_percentage_summary">Show hidden percentage</string>
-
-    <!--  Volume rocker -->
-    <string name="volume_rocker_screen_title">Volume rocker</string>
-    <!--- Volume key cursor control -->
-    <string name="volume_key_cursor_control_title">Volume key cursor control</string>
-    <string name="volume_key_cursor_control_off">Disabled</string>
-    <string name="volume_key_cursor_control_on">Volume up/down moves cursor left/right</string>
-    <string name="volume_key_cursor_control_on_reverse">Volume up/down moves cursor right/left</string>
 
     <!-- Network traffic -->
     <string name="network_traffic_title">Network traffic</string>
@@ -66,6 +51,32 @@
     <string name="network_traffic_autohide">Auto hide</string>
     <string name="network_traffic_autohide_summary">Hide the traffic monitor when there is no activity</string>
     <string name="network_traffic_autohide_threshold">Inactivity threshold</string>
+
+    <!-- Navigation bar settings -->
+    <string name="navigation_bar_title">Navigation bar</string>
+
+    <!-- Navigation Bar Height -->
+    <string name="navigation_bar_height">Navigation bar height</string>
+    <string name="navigation_bar_height_48">48dp (default)</string>
+    <string name="navigation_bar_height_44">44dp</string>
+    <string name="navigation_bar_height_40">40dp</string>
+    <string name="navigation_bar_height_36">36dp</string>
+    <string name="navigation_bar_height_32">32dp</string>
+    <string name="navigation_bar_height_28">28dp</string>
+    <string name="navigation_bar_height_24">24dp</string>
+    <string name="navigation_bar_height_20">20dp</string>
+    <string name="navigation_bar_height_0">0dp (hide)</string>
+
+    <!-- Button settings -->
+    <string name="buttons_title">Buttons</string>
+
+    <!--  Volume rocker -->
+    <string name="volume_rocker_screen_title">Volume rocker</string>
+    <!--- Volume key cursor control -->
+    <string name="volume_key_cursor_control_title">Volume key cursor control</string>
+    <string name="volume_key_cursor_control_off">Disabled</string>
+    <string name="volume_key_cursor_control_on">Volume up/down moves cursor left/right</string>
+    <string name="volume_key_cursor_control_on_reverse">Volume up/down moves cursor right/left</string>
 
     <!-- Volume adjust sound -->
     <string name="volume_key_adjust_sound_title">Volume key adjustment sound</string>

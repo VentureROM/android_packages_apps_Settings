@@ -4,23 +4,25 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class VolumeRocker extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
+public class ButtonSettings extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
-    // volume cursor control
     private static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
+    private static final String VOLUME_KEY_ADJUST_SOUND = "volume_key_adjust_sound";
 
     private ListPreference mVolumeKeyCursorControl;
+    private SwitchPreference mVolumeKeyAdjustSound;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.volume_rocker_settings);
+        addPreferencesFromResource(R.xml.button_settings);
 
         mVolumeKeyCursorControl = (ListPreference) findPreference(VOLUME_KEY_CURSOR_CONTROL);
         if (mVolumeKeyCursorControl != null) {
@@ -29,6 +31,11 @@ public class VolumeRocker extends SettingsPreferenceFragment implements OnPrefer
                     .getContentResolver(), Settings.System.VOLUME_KEY_CURSOR_CONTROL, 0)));
             mVolumeKeyCursorControl.setSummary(mVolumeKeyCursorControl.getEntry());
         }
+
+        mVolumeKeyAdjustSound = (SwitchPreference) findPreference(VOLUME_KEY_ADJUST_SOUND);
+        mVolumeKeyAdjustSound.setOnPreferenceChangeListener(this);
+        mVolumeKeyAdjustSound.setChecked(Settings.System.getInt(getContentResolver(),
+                VOLUME_KEY_ADJUST_SOUND, 1) != 0);
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
@@ -41,6 +48,10 @@ public class VolumeRocker extends SettingsPreferenceFragment implements OnPrefer
             int volumeKeyCursorControlIndex = mVolumeKeyCursorControl.findIndexOfValue(volumeKeyCursorControl);
             mVolumeKeyCursorControl.setSummary(mVolumeKeyCursorControl.getEntries()[volumeKeyCursorControlIndex]);
             return true;
+        } else if (preference == mVolumeKeyAdjustSound) {
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(getContentResolver(), VOLUME_KEY_ADJUST_SOUND,
+                    value ? 1: 0);
         }
         return true;
     }
