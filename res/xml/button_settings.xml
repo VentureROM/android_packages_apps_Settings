@@ -4,7 +4,7 @@
 
     <PreferenceCategory
         android:key="buttons_general"
-        android:string="@string/general">
+        android:title="@string/general">
 
 	    <ListPreference
 	        android:dialogTitle="@string/volume_key_cursor_control_title"
