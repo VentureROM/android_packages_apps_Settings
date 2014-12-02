@@ -104,6 +104,7 @@ import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
+import com.android.settings.venture.VentureTweaks;
 import com.android.settings.voice.VoiceInputSettings;
 import com.android.settings.vpn2.VpnSettings;
 import com.android.settings.wfd.WifiDisplaySettings;
@@ -233,7 +234,8 @@ public class SettingsActivity extends Activity
             R.id.print_settings,
             R.id.nfc_payment_settings,
             R.id.home_settings,
-            R.id.dashboard
+            R.id.dashboard,
+            R.id.venture_tweaks
     };
 
     private static final String[] ENTRY_FRAGMENTS = {
@@ -297,7 +299,8 @@ public class SettingsActivity extends Activity
             AppNotificationSettings.class.getName(),
             OtherSoundSettings.class.getName(),
             QuickLaunchSettings.class.getName(),
-            ApnSettings.class.getName()
+            ApnSettings.class.getName(),
+            VentureTweaks.class.getName()
     };
 
 

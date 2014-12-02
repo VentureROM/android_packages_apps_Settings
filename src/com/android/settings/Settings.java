@@ -101,5 +101,8 @@ public class Settings extends SettingsActivity {
 
     public static class TopLevelSettings extends SettingsActivity { /* empty */ }
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
+
+    // VentureROM Additions
+    public static class VentureTweaksActivity extends SettingsActivity { /* empty */ }
 }
 

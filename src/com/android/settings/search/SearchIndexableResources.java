@@ -44,6 +44,7 @@ import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.users.UserSettings;
+import com.android.settings.venture.VentureTweaks;
 import com.android.settings.voice.VoiceInputSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
@@ -115,6 +116,13 @@ public final class SearchIndexableResources {
                         NO_DATA_RES_ID,
                         WirelessSettings.class.getName(),
                         R.drawable.ic_settings_more));
+
+        sResMap.put(VentureTweaks.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(VentureTweaks.class.getName()),
+                        NO_DATA_RES_ID,
+                        VentureTweaks.class.getName(),
+                        R.drawable.ic_settings_development));
 
         sResMap.put(HomeSettings.class.getName(),
                 new SearchIndexableResource(
