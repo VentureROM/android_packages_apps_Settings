@@ -56,6 +56,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     // Quick pulldown
     private static final String PRE_QUICK_PULLDOWN = "quick_pulldown";
 
+    // Smart pulldown
+    private static final String PREF_SMART_PULLDOWN = "smart_pulldown";
+
     // Network traffic
     private static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
     private static final String NETWORK_TRAFFIC_UNIT = "network_traffic_unit";
@@ -77,6 +80,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
     // Quick pulldown
     ListPreference mQuickPulldown;
+
+    // Smart pulldown
+    ListPreference mSmartPulldown;
 
     // Network traffic
     private ListPreference mNetTrafficState;
@@ -124,9 +130,11 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
                 .getApplicationContext().getContentResolver(),
                 Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 0) == 1));
 
-        mQuickPulldown = (ListPreference) findPreference(PRE_QUICK_PULLDOWN);
+        mQuickPulldown = (ListPreference) prefSet.findPreference(PRE_QUICK_PULLDOWN);
+        mSmartPulldown = (ListPreference) prefSet.findPreference(PREF_SMART_PULLDOWN);
         if (!DeviceUtils.isPhone(getActivity())) {
-            prefs.removePreference(mQuickPulldown);
+            prefSet.removePreference(mQuickPulldown);
+            prefSet.removePreference(mSmartPulldown);
         } else {
             // Quick Pulldown
             mQuickPulldown.setOnPreferenceChangeListener(this);
@@ -134,6 +142,13 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
                     Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN, 1);
             mQuickPulldown.setValue(String.valueOf(statusQuickPulldown));
             updateQuickPulldownSummary(statusQuickPulldown);
+
+            // Smart Pulldown
+            mSmartPulldown.setOnPreferenceChangeListener(this);
+            int smartPulldown = Settings.System.getInt(getContentResolver(),
+                    Settings.System.QS_SMART_PULLDOWN, 0);
+            mSmartPulldown.setValue(String.valueOf(smartPulldown));
+            updateSmartPulldownSummary(smartPulldown);
         }
 
         // Network traffic
@@ -222,6 +237,12 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
                     statusQuickPulldown);
             updateQuickPulldownSummary(statusQuickPulldown);
             return true;
+        } else if (preference == mSmartPulldown) {
+            int smartPulldown = Integer.valueOf((String) objValue);
+            Settings.System.putInt(getContentResolver(), Settings.System.QS_SMART_PULLDOWN,
+                    smartPulldown);
+            updateSmartPulldownSummary(smartPulldown);
+            return true;
         }
         return false;
     }
@@ -274,6 +295,31 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
                     ? (isRtl ? R.string.quick_pulldown_right : R.string.quick_pulldown_left)
                     : (isRtl ? R.string.quick_pulldown_left : R.string.quick_pulldown_right));
             mQuickPulldown.setSummary(res.getString(R.string.summary_quick_pulldown, direction));
+        }
+    }
+
+    private void updateSmartPulldownSummary(int value) {
+        Resources res = getResources();
+
+        if (value == 0) {
+            // Smart pulldown deactivated
+            mSmartPulldown.setSummary(res.getString(R.string.smart_pulldown_off));
+        } else {
+            String type = null;
+            switch (value) {
+                case 1:
+                    type = res.getString(R.string.smart_pulldown_dismissable);
+                    break;
+                case 2:
+                    type = res.getString(R.string.smart_pulldown_persistent);
+                    break;
+                default:
+                    type = res.getString(R.string.smart_pulldown_all);
+                    break;
+            }
+            // Remove title capitalized formatting
+            type = type.toLowerCase();
+            mSmartPulldown.setSummary(res.getString(R.string.smart_pulldown_summary, type));
         }
     }
 
