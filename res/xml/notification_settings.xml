@@ -48,6 +48,12 @@
                 android:icon="@drawable/ring_notif"
                 android:title="@string/notification_volume_option_title" />
 
+	<!-- Expanded sound panel -->
+        <SwitchPreference
+                android:key="sound_expanded_panel"
+                android:title="@string/expanded_sound_panel"
+                android:persistent="false" />
+
         <!-- Also vibrate for calls -->
         <SwitchPreference
                 android:key="vibrate_when_ringing"
