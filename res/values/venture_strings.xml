@@ -86,4 +86,7 @@
     <!-- double-tap-to-sleep -->
     <string name="double_tap_to_sleep_title">Double-tap to sleep</string>
     <string name="double_tap_to_sleep_summary">Double tap status bar to put the device to sleep</string>
+
+    <!-- Expanded sound panel -->
+    <string name="expanded_sound_panel">Expanded Sound Panel</string>
 </resources>
