@@ -97,7 +97,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
         // Double tap to sleep
         mDoubleTapToSleep = (CheckBoxPreference) getPreferenceScreen()
                 .findPreference(DOUBLE_TAP_SLEEP_GESTURE);
-        mDoubleTapToSleep.setChecked((System.System.getInt(getActivity()
+        mDoubleTapToSleep.setChecked((Settings.System.getInt(getActivity()
                 .getApplicationContext().getContentResolver(),
                 Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 0) == 1));
 
