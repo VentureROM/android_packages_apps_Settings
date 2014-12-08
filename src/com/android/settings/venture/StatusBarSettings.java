@@ -44,7 +44,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     private static final String STATUS_BAR_NATIVE_BATTERY_PERCENTAGE = "status_bar_native_battery_percentage";
 
     // Double tap to sleep
-    private static final String DOUBLE_TAP_TO_SLEEP = "double_tap_sleep_gesture";
+    private static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
 
     // Network traffic
     private static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
@@ -96,10 +96,10 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
         // Double tap to sleep
         mDoubleTapToSleep = (CheckBoxPreference) getPreferenceScreen()
-                .findPreference(DOUBLE_TAP_TO_SLEEP);
+                .findPreference(DOUBLE_TAP_SLEEP_GESTURE);
         mDoubleTapToSleep.setChecked((System.System.getInt(getActivity()
                 .getApplicationContext().getContentResolver(),
-                Settings.System.DOUBLE_TAP_TO_SLEEP, 0) == 1));
+                Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 0) == 1));
 
         // Network traffic
         mNetTrafficState = (ListPreference) prefSet.findPreference(NETWORK_TRAFFIC_STATE);
@@ -193,8 +193,8 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
             return true;
         } else if (preference == mDoubleTapToSleep) {
             value = mDoubleTapToSleep.isChecked();
-            System.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.DOUBLE_TAP_TO_SLEEP, value ? 1 : 0);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE, value ? 1 : 0);
             return true;
         }
  		return super.onPreferenceTreeClick(preferenceScreen, preference);
