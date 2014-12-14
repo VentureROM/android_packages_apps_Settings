@@ -31,6 +31,12 @@
             android:summary="@string/status_bar_native_battery_percentage_summary" />
 
         <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="status_bar_show_weather"
+            android:title="@string/status_bar_show_weather_title"
+            android:summary="@string/status_bar_show_weather_summary" />
+
+        <CheckBoxPreference
             android:defaultValue="false"
             android:key="double_tap_sleep_gesture"
             android:title="@string/double_tap_to_sleep_title"
@@ -78,5 +84,4 @@
             android:dependency="network_traffic_autohide"
             android:persistent="false" />
     </PreferenceCategory>
-
 </PreferenceScreen>

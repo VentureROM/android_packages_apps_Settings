@@ -43,6 +43,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     // Native battery percentage
     private static final String STATUS_BAR_NATIVE_BATTERY_PERCENTAGE = "status_bar_native_battery_percentage";
 
+    // Show weather in status bar header
+    private static final String STATUS_BAR_SHOW_WEATHER = "status_bar_show_weather";
+
     // Double tap to sleep
     private static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
 
@@ -58,6 +61,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
     // Native battery percentage
     private CheckBoxPreference mStatusBarNativeBatteryPercentage;
+
+    // Show weather in status bar header
+    private CheckBoxPreference mStatusBarShowWeather;
 
     // Double tap to sleep
     private CheckBoxPreference mDoubleTapToSleep;
@@ -93,6 +99,13 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
         mStatusBarNativeBatteryPercentage.setChecked((Settings.System.getInt(getActivity()
                 .getApplicationContext().getContentResolver(),
                 Settings.System.STATUS_BAR_NATIVE_BATTERY_PERCENTAGE, 0) == 1));
+
+        // Show weather in status bar
+        mStatusBarShowWeather = (CheckBoxPreference) getPreferenceScreen()
+                .findPreference(STATUS_BAR_SHOW_WEATHER);
+        mStatusBarShowWeather.setChecked((Settings.System.getInt(getActivity()
+                .getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_SHOW_WEATHER, 0) == 1));
 
         // Double tap to sleep
         mDoubleTapToSleep = (CheckBoxPreference) getPreferenceScreen()
@@ -190,6 +203,11 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
             value = mStatusBarNativeBatteryPercentage.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_NATIVE_BATTERY_PERCENTAGE, value ? 1 : 0);
+            return true;
+        } else if (preference == mStatusBarShowWeather) {
+            value = mStatusBarShowWeather.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_SHOW_WEATHER, value ? 1 : 0);
             return true;
         } else if (preference == mDoubleTapToSleep) {
             value = mDoubleTapToSleep.isChecked();
