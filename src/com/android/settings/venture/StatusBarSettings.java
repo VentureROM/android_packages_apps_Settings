@@ -221,8 +221,8 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
             updateSmartPulldownSummary(smartPulldown);
             return true;
         } else if (preference == mStatusBarBattery) {
-            int batteryStyle = Integer.valueOf((String) newValue);
-            int index = mStatusBarBattery.findIndexOfValue((String) newValue);
+            int batteryStyle = Integer.valueOf((String) objValue);
+            int index = mStatusBarBattery.findIndexOfValue((String) objValue);
             Settings.System.putInt(
                     resolver, Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENT, batteryStyle);
             mStatusBarBattery.setSummary(mStatusBarBattery.getEntries()[index]);
