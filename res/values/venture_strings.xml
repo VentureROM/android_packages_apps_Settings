@@ -93,6 +93,10 @@
     <string name="volume_key_adjust_sound_title">Volume key adjustment sound</string>
     <string name="volume_key_adjust_sound_summary">Play sound when adjusting volume with volume keys</string>
 
+    <!-- Volume long press seek controls --> 
+    <string name="volbtn_music_controls_title">Playback control</string>
+    <string name="volbtn_music_controls_summary">When the screen is off, long pressing the volume keys will seek music tracks</string>
+
     <!-- double-tap-to-sleep -->
     <string name="double_tap_to_sleep_title">Double-tap to sleep</string>
     <string name="double_tap_to_sleep_summary">Double tap status bar to put the device to sleep</string>
