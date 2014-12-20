@@ -29,9 +29,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements OnPref
 
     private static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
     private static final String VOLUME_KEY_ADJUST_SOUND = "volume_key_adjust_sound";
+    private static final String KEY_SWAP_VOLUME_BUTTONS = "swap_volume_buttons";
 
     private ListPreference mVolumeKeyCursorControl;
     private SwitchPreference mVolumeKeyAdjustSound;
+    private SwitchPreference mSwapVolumeButtons;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,10 +53,15 @@ public class ButtonSettings extends SettingsPreferenceFragment implements OnPref
         mVolumeKeyAdjustSound.setOnPreferenceChangeListener(this);
         mVolumeKeyAdjustSound.setChecked(Settings.System.getInt(getContentResolver(),
                 VOLUME_KEY_ADJUST_SOUND, 1) != 0);
+                
+        int swapVolumeKeys = Settings.System.getInt(getContentResolver(),
+                    Settings.System.SWAP_VOLUME_KEYS_ON_ROTATION, 0);
+        mSwapVolumeButtons = (SwitchPreference) findPreference(KEY_SWAP_VOLUME_BUTTONS);
+        mSwapVolumeButtons.setChecked(swapVolumeKeys > 0);
     }
 
+    @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-
         if (preference == mVolumeKeyCursorControl) {
             String volumeKeyCursorControl = (String) objValue;
             int volumeKeyCursorControlValue = Integer.parseInt(volumeKeyCursorControl);
@@ -69,5 +76,16 @@ public class ButtonSettings extends SettingsPreferenceFragment implements OnPref
                     value ? 1: 0);
         }
         return true;
+    }
+    
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mSwapVolumeButtons) {
+            int value = mSwapVolumeButtons.isChecked()
+                    ? (Utils.isTablet(getActivity()) ? 2 : 1) : 0;
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.SWAP_VOLUME_KEYS_ON_ROTATION, value);
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 }
