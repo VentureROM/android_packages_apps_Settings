@@ -38,6 +38,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.venture.chameleonos.SeekBarPreference;
 
+import java.util.Locale;
+
 public class StatusBarSettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
 
