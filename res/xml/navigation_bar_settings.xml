@@ -24,13 +24,30 @@
         android:key="navigation_bar_general"
         android:title="@string/general">
 
+        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+            android:key="navigation_bar_show"
+            android:title="@string/navbar_enable_bar"
+            android:defaultValue="true" />
+
         <ListPreference
-            android:key="navigation_bar_height"
-            android:dialogTitle="@string/navigation_bar_height"
-            android:title="@string/navigation_bar_height"
             android:entries="@array/navigation_bar_height_entries"
-            android:entryValues="@array/navigation_bar_height_values"
-            android:defaultValue="48"
+            android:entryValues="@array/navigation_bar_height"
+            android:key="navigation_bar_height"
+            android:title="@string/navigation_bar_height_title"
+            android:persistent="false" />
+
+        <ListPreference
+            android:entries="@array/navigation_bar_height_entries_landscape"
+            android:entryValues="@array/navigation_bar_height_landscape"
+            android:key="navigation_bar_height_landscape"
+            android:title="@string/navigation_bar_height_landscape_title"
+            android:persistent="false" />
+
+        <ListPreference
+            android:entries="@array/navigation_bar_width_entries"
+            android:entryValues="@array/navigation_bar_width"
+            android:key="navigation_bar_width"
+            android:title="@string/navigation_bar_width_title"
             android:persistent="false" />
     </PreferenceCategory>
 
