@@ -46,9 +46,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     // General
     private static String STATUS_BAR_GENERAL_CATEGORY = "status_bar_general_category";
 
-    // Native battery percentage
-    private static final String STATUS_BAR_NATIVE_BATTERY_PERCENTAGE = "status_bar_native_battery_percentage";
-
     // Quick pulldown
     private static final String PRE_QUICK_PULLDOWN = "quick_pulldown";
 
@@ -64,9 +61,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
     // General
     private PreferenceCategory mStatusBarGeneralCategory;
-
-    // Native battery percentage
-    private CheckBoxPreference mStatusBarNativeBatteryPercentage;
 
     // Quick pulldown
     ListPreference mQuickPulldown;
@@ -224,13 +218,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        boolean value;
-        if (preference == mStatusBarNativeBatteryPercentage) {
-            value = mStatusBarNativeBatteryPercentage.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.STATUS_BAR_NATIVE_BATTERY_PERCENTAGE, value ? 1 : 0);
-            return true;
-        }
  		return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
