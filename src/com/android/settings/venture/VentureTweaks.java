@@ -36,7 +36,7 @@ public class VentureTweaks extends SettingsPreferenceFragment {
 
         PreferenceScreen prefSet = getPreferenceScreen();
 
-        mLockClock = (PreferenceScreen) findPreference(KEY_LOCK_CLOCK);
+        mLockClock = (PreferenceScreen) prefSet.findPreference(KEY_LOCK_CLOCK);
         if (!Utils.isPackageInstalled(getActivity(), KEY_LOCK_CLOCK_PACKAGE_NAME)) {
             prefSet.removePreference(mLockClock);
         }

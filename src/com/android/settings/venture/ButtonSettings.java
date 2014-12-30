@@ -74,8 +74,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements OnPref
             boolean value = (Boolean) objValue;
             Settings.System.putInt(getContentResolver(), VOLUME_KEY_ADJUST_SOUND,
                     value ? 1: 0);
+            return true;
         }
-        return true;
+        return false;
     }
     
     @Override
