@@ -21,16 +21,19 @@
     <PreferenceScreen
         android:key="status_bar_settings"
         android:title="@string/status_bar_title"
+        android:summary="@string/status_bar_summary"
         android:fragment="com.android.settings.venture.StatusBarSettings" />
 
     <PreferenceScreen
         android:key="navigation_bar_settings"
         android:title="@string/navigation_bar_title"
+        android:summary="@string/navigation_bar_summary"
         android:fragment="com.android.settings.venture.NavigationBarSettings" />
 
     <PreferenceScreen
         android:key="button_settings"
         android:title="@string/buttons_title"
+        android:summary="@string/buttons_summary"
         android:fragment="com.android.settings.venture.ButtonSettings" />
 
     <PreferenceScreen

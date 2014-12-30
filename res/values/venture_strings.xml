@@ -28,6 +28,7 @@
 
     <!-- Statusbar settings -->
     <string name="status_bar_title">Status bar</string>
+    <string name="status_bar_summary">Change various status bar options including battery styles</string>
 
     <!-- Battery settings -->
     <string name="status_bar_battery_percentage_title">Show battery percentage</string>
@@ -65,6 +66,7 @@
 
     <!-- Navigation bar settings -->
     <string name="navigation_bar_title">Navigation bar</string>
+    <string name="navigation_bar_summary">View or change navigation bar settings</string>
 
     <!-- Navigation bar -->
     <string name="navigation_bar_category">Navigation bar</string>
@@ -86,6 +88,7 @@
 
     <!-- Button settings -->
     <string name="buttons_title">Buttons</string>
+    <string name="buttons_summary">Change various settings for softkeys and hardware keys if available</string>
 
     <!--  Volume rocker -->
     <string name="volume_rocker_screen_title">Volume rocker</string>
