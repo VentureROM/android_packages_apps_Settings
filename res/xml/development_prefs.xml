@@ -118,14 +118,10 @@
             android:title="@string/wifi_aggressive_handover" />
             android:summary="@string/wifi_aggressive_handover_summary"/>
 
-<<<<<<< HEAD
-        <CheckBoxPreference
-=======
        <SwitchPreference
->>>>>>> 0a89fc4... Settings: Developer Settings - We want consistence...change from CheckBox…
             android:key="wifi_allow_scan_with_traffic"
-            android:title="@string/wifi_allow_scan_with_traffic" />
-            android:summary="@string/wifi_allow_scan_with_traffic_summary"/>
+            android:title="@string/wifi_allow_scan_with_traffic" 
+	    android:summary="@string/wifi_allow_scan_with_traffic_summary" />
 
         <ListPreference
             android:key="select_logd_size"
