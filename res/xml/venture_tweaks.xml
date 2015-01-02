@@ -25,6 +25,12 @@
         android:fragment="com.android.settings.venture.StatusBarSettings" />
 
     <PreferenceScreen
+        android:key="notification_drawer_settings"
+        android:title="@string/notification_drawer_title"
+        android:summary="@string/notification_drawer_summary"
+        android:fragment="com.android.settings.venture.NotificationDrawerSettings" />
+
+    <PreferenceScreen
         android:key="button_settings"
         android:title="@string/buttons_title"
         android:summary="@string/buttons_summary"

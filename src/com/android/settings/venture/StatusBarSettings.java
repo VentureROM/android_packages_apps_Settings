@@ -40,6 +40,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.venture.chameleonos.SeekBarPreference;
+import com.android.settings.venture.qs.QSTiles;
 
 import java.util.Locale;
 
@@ -55,10 +56,8 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     private static final String STATUS_BAR_BATTERY_STYLE_TEXT = "6";
     private static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
 
-    // Quick pulldown
+    // Quick settings
     private static final String PRE_QUICK_PULLDOWN = "quick_pulldown";
-
-    // Smart pulldown
     private static final String PREF_SMART_PULLDOWN = "smart_pulldown";
 
     // Network traffic
@@ -78,11 +77,10 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     private ListPreference mStatusBarBatteryShowPercent;
     private ListPreference mStatusBarBattery;
 
-    // Quick pulldown
-    ListPreference mQuickPulldown;
-
-    // Smart pulldown
-    ListPreference mSmartPulldown;
+    // Quick settings
+    private ListPreference mQuickPulldown;
+    private ListPreference mSmartPulldown;
+    private Preference mQSTiles;
 
     // Network traffic
     private ListPreference mNetTrafficState;
@@ -144,6 +142,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
         mQuickPulldown = (ListPreference) prefSet.findPreference(PRE_QUICK_PULLDOWN);
         mSmartPulldown = (ListPreference) prefSet.findPreference(PREF_SMART_PULLDOWN);
+        mQSTiles = prefSet.findPreference("qs_order");
         if (!DeviceUtils.isPhone(getActivity())) {
             prefSet.removePreference(mQuickPulldown);
             prefSet.removePreference(mSmartPulldown);
@@ -362,5 +361,14 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
         boolean enabled = !(value.equals(STATUS_BAR_BATTERY_STYLE_TEXT)
                 || value.equals(STATUS_BAR_BATTERY_STYLE_HIDDEN));
         mStatusBarBatteryShowPercent.setEnabled(enabled);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        int qsTileCount = QSTiles.determineTileCount(getActivity());
+        mQSTiles.setSummary(getResources().getQuantityString(R.plurals.qs_tiles_summary,
+                    qsTileCount, qsTileCount));
     }
 }
