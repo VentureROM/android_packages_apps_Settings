@@ -69,8 +69,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "lock_screen_notifications";
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
-    
-    private static final String KEY_EXPANDED_PANEL = "sound_expanded_panel";
 
     private static final int SAMPLE_CUTOFF = 2000;  // manually cap sample playback at 2 seconds
 
@@ -92,8 +90,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private Preference mNotificationAccess;
     private boolean mSecure;
     private int mLockscreenSelectedValue;
-    
-    private TwoStatePreference mExpandedPanel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,7 +120,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         }
         initRingtones(sound);
         initVibrateWhenRinging(sound);
-        initExpandedPanel(sound);
 
         final PreferenceCategory notification = (PreferenceCategory)
                 findPreference(KEY_NOTIFICATION);
@@ -270,33 +265,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
             }
         }
         return summary;
-    }
-    
-    // === Expanded Sound Panel ===
-
-    private void initExpandedPanel(PreferenceCategory root) {
-        mExpandedPanel = (TwoStatePreference) root.findPreference(KEY_EXPANDED_PANEL);
-        if (mExpandedPanel == null) {
-            Log.i(TAG, "Preference not found: " + KEY_EXPANDED_PANEL);
-            return;
-        }
-        mExpandedPanel.setPersistent(false);
-        updateExpandedPanel();
-        mExpandedPanel.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean val = (Boolean) newValue;
-                return Settings.System.putInt(getContentResolver(),
-                        Settings.System.SOUND_EXPANDED_PANEL,
-                        val ? 1 : 0);
-            }
-        });
-    }
-
-    private void updateExpandedPanel() {
-        if (mExpandedPanel == null) return;
-        mExpandedPanel.setChecked(Settings.System.getInt(getContentResolver(),
-                Settings.System.SOUND_EXPANDED_PANEL, 0) != 0);
     }
 
     // === Vibrate when ringing ===
