@@ -48,4 +48,15 @@
             android:summary="@string/swap_volume_buttons_summary" />
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="recents"
+        android:title="@string/recents_category">
+
+        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+            android:key="recents_clear_all_dismiss_all"
+            android:title="@string/recents_clear_all_dismiss_all_title"
+            android:summary="@string/recents_clear_all_dismiss_all_summary"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+
 </PreferenceScreen>
