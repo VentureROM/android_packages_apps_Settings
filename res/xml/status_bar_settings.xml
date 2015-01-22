@@ -98,7 +98,7 @@
             android:title="@string/qs_order_title"
             android:fragment="com.android.settings.venture.qs.QSTiles" />
 
-        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+        <com.android.settings.cyanogenmod.SecureSettingSwitchPreference
             android:key="qs_location_advanced"
             android:title="@string/qs_advanced_location_title"
             android:summary="@string/qs_advanced_location_summary"
