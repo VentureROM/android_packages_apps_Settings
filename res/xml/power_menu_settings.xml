@@ -40,7 +40,12 @@
         <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
             android:key="powermenu_screenshot"
             android:title="@string/powermenu_screenshot"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
+
+        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+            android:key="powermenu_screenrecord"
+            android:title="@string/powermenu_screenrecord"
+            android:defaultValue="false" />
 
         <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
             android:key="powermenu_airplane"
