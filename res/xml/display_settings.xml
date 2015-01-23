@@ -91,5 +91,11 @@
                     android:title="@string/proximity_wake_title"
                     android:summary="@string/proximity_wake_summary"
                     android:defaultValue="true" />
+
+                <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+                    android:defaultValue="false"
+                    android:key="double_tap_sleep_gesture"
+                    android:title="@string/double_tap_to_sleep_title"
+                    android:summary="@string/double_tap_to_sleep_summary"/>
         </PreferenceCategory>
 </PreferenceScreen>
