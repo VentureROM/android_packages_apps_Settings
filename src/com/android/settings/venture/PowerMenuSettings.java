@@ -49,7 +49,7 @@ public class PowerMenuSettings extends SettingsPreferenceFragment implements OnP
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.powermenu);
+        addPreferencesFromResource(R.xml.power_menu_settings);
 
         mPrefSet = getPreferenceScreen();
 
