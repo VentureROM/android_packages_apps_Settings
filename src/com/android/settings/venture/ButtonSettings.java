@@ -33,8 +33,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements OnPref
     private static final String VOLUME_KEY_ADJUST_SOUND = "volume_key_adjust_sound";
     private static final String KEY_SWAP_VOLUME_BUTTONS = "swap_volume_buttons";
 
-    private PreferenceGroup mPowerMenuCategory;
-
     private ListPreference mVolumeKeyCursorControl;
     private SwitchPreference mVolumeKeyAdjustSound;
     private SwitchPreference mSwapVolumeButtons;
