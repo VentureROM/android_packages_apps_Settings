@@ -133,13 +133,6 @@
     <string name="swap_volume_buttons_title">Reorient</string>
     <string name="swap_volume_buttons_summary">Swap volume buttons when the screen is rotated</string>
 
-    <!-- Notifications as heads-up -->
-    <string name="zen_heads_up_toggle_title">Heads-up notifications</string>
-    <string name="zen_heads_up_toggle_summary">Allows incoming notifications that support the heads-up mode to be displayed at the top.</string>
-    <!-- Heads-up ticker enabled setting, experimental. -->
-    <string name="heads_up_ticker_exp_title">Enable heads-up ticker check</string>
-    <string name="heads_up_ticker_exp_summary">When a notification is not noisy check if ticker is not null and show it. Grouped notifications are still half-broken, see hangouts.</string>
-
     <string name="app_notification_show_on_keyguard_title">Show on lockscreen</string>
     <string name="app_notification_show_on_keyguard_summary">Show notifications from this app on the lockscreen</string>
     <string name="app_notification_no_ongoing_on_keyguard_title">Disable ongoing on lockscreen</string>
