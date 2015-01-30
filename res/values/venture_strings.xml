@@ -91,7 +91,7 @@
 
     <!-- Weather in status bar -->
     <string name="status_bar_show_weather_title">Show weather</string>
-    <string name="status_bar_show_weather_summary">Show the weather in the status bar header</string>
+    <string name="status_bar_show_weather_summary">Show the weather above the Quick Settings panel</string>
 
     <!-- QuickSettings: Quick Pulldown -->
     <string name="qs_settings">Quick settings</string>
