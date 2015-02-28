@@ -276,6 +276,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
                     Settings.System.STATUS_BAR_TICKER_ENABLED,
                     (Boolean) objValue ? 1 : 0);
             return true;
+        }
         return false;
     }
 
