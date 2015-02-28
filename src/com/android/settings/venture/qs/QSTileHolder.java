@@ -17,8 +17,8 @@ package com.android.settings.venture.qs;
 
 import android.content.Context;
 
-import com.android.internal.util.cm.QSConstants;
-import com.android.internal.util.cm.QSUtils;
+import com.android.internal.util.venture.QSConstants;
+import com.android.internal.util.venture.QSUtils;
 import com.android.settings.R;
 
 /**

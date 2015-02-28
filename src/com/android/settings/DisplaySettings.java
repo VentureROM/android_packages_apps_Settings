@@ -98,7 +98,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         mDozeFragement = (PreferenceScreen) findPreference(KEY_DOZE_FRAGMENT);
         if (!isDozeAvailable(activity)) {
-            generalPrefs.removePreference(mDozeFragement);
+            getPreferenceScreen().removePreference(mDozeFragement);
             mDozeFragement = null;
         }
 
@@ -133,13 +133,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mLiftToWakePreference.setOnPreferenceChangeListener(this);
         } else {
             removePreference(KEY_LIFT_TO_WAKE);
-        }
-
-        if (isDozeAvailable(activity)) {
-            mDozePreference = (SwitchPreference) findPreference(KEY_DOZE);
-            mDozePreference.setOnPreferenceChangeListener(this);
-        } else {
-            removePreference(KEY_DOZE);
         }
 
         if (RotationPolicy.isRotationLockToggleVisible(activity)) {
