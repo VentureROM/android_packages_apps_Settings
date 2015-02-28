@@ -47,6 +47,8 @@ import java.util.Locale;
 public class StatusBarSettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
 
+    private static String TAG = "StatusBarSettings.java";
+
     // General
     private static String STATUS_BAR_GENERAL_CATEGORY = "status_bar_general_category";
 
