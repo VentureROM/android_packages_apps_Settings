@@ -60,7 +60,7 @@
         <PreferenceScreen
                 android:key="doze_fragment"
                 android:title="@string/doze_title"
-                android:fragment="com.android.settings.euphoria.ambientdisplay.AmbientSettings" />
+                android:fragment="com.android.settings.venture.ambientdisplay.AmbientSettings" />
 
         <com.android.settings.WarnedListPreference
                 android:key="font_size"
