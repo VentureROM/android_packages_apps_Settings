@@ -61,13 +61,12 @@ public final class Ranking {
     public static final int RANK_SIM = 3;
     public static final int RANK_DATA_USAGE = 4;
     public static final int RANK_WIRELESS = 5;
-<<<<<<< HEAD
     public static final int RANK_VENTURETWEAKS = 6;
     public static final int RANK_HOME = 7;
     public static final int RANK_DISPLAY = 8;
     public static final int RANK_WALLPAPER = 9;
     public static final int RANK_NOTIFICATIONS = 10;
-    public static final int RANK_MEMORY = 11;
+    public static final int RANK_STORAGE = 11;
     public static final int RANK_POWER_USAGE = 12;
     public static final int RANK_USERS = 13;
     public static final int RANK_LOCATION = 14;
@@ -79,24 +78,6 @@ public final class Ranking {
     public static final int RANK_PRINTING = 20;
     public static final int RANK_DEVELOPEMENT = 21;
     public static final int RANK_DEVICE_INFO = 22;
-=======
-    public static final int RANK_HOME = 6;
-    public static final int RANK_DISPLAY = 7;
-    public static final int RANK_WALLPAPER = 8;
-    public static final int RANK_NOTIFICATIONS = 9;
-    public static final int RANK_STORAGE = 10;
-    public static final int RANK_POWER_USAGE = 11;
-    public static final int RANK_USERS = 12;
-    public static final int RANK_LOCATION = 13;
-    public static final int RANK_SECURITY = 14;
-    public static final int RANK_IME = 15;
-    public static final int RANK_PRIVACY = 16;
-    public static final int RANK_DATE_TIME = 17;
-    public static final int RANK_ACCESSIBILITY = 18;
-    public static final int RANK_PRINTING = 19;
-    public static final int RANK_DEVELOPEMENT = 20;
-    public static final int RANK_DEVICE_INFO = 21;
->>>>>>> android-5.1.0_r1
 
     public static final int RANK_UNDEFINED = -1;
     public static final int RANK_OTHERS = 1024;

@@ -139,10 +139,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     // When the user enters a short pin/password, run this to show an error,
     // but don't count it against attempts.
     private final Runnable mFakeUnlockAttemptRunnable = new Runnable() {
-<<<<<<< HEAD
-=======
         @Override
->>>>>>> android-5.1.0_r1
         public void run() {
             handleBadAttempt(1 /* failedAttempt */);
         }
@@ -151,12 +148,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     // TODO: this should be tuned to match minimum decryption timeout
     private static final int FAKE_ATTEMPT_DELAY = 1000;
 
-<<<<<<< HEAD
-    private Runnable mClearPatternRunnable = new Runnable() {
-=======
     private final Runnable mClearPatternRunnable = new Runnable() {
         @Override
->>>>>>> android-5.1.0_r1
         public void run() {
             mLockPatternView.clearPattern();
         }
@@ -230,35 +223,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             }
         }
     }
-<<<<<<< HEAD
-
-    private void handleBadAttempt(Integer failedAttempts) {
-        // Wrong entry. Handle pattern case.
-        if (mLockPatternView != null) {
-            mLockPatternView.setDisplayMode(DisplayMode.Wrong);
-            mLockPatternView.removeCallbacks(mClearPatternRunnable);
-            mLockPatternView.postDelayed(mClearPatternRunnable, WRONG_PATTERN_CLEAR_TIMEOUT_MS);
-        }
-        if ((failedAttempts % COOL_DOWN_ATTEMPTS) == 0) {
-            mCooldown = COOL_DOWN_INTERVAL;
-            cooldown();
-        } else {
-            final TextView status = (TextView) findViewById(R.id.status);
-
-            int remainingAttempts = MAX_FAILED_ATTEMPTS - failedAttempts;
-            if (remainingAttempts < COOL_DOWN_ATTEMPTS) {
-                CharSequence warningTemplate = getText(R.string.crypt_keeper_warn_wipe);
-                CharSequence warning = TextUtils.expandTemplate(warningTemplate,
-                        Integer.toString(remainingAttempts));
-                status.setText(warning);
-            } else {
-                status.setText(R.string.try_again);
-            }
-
-            if (mLockPatternView != null) {
-                mLockPatternView.setDisplayMode(DisplayMode.Wrong);
-            }
-=======
 
     private void beginAttempt() {
         final TextView status = (TextView) findViewById(R.id.status);
@@ -309,7 +273,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 mLockPatternView.setEnabled(true);
             }
 
->>>>>>> android-5.1.0_r1
             // Reenable the password entry
             if (mPasswordEntry != null) {
                 mPasswordEntry.setEnabled(true);
@@ -317,12 +280,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                         Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(mPasswordEntry, 0);
                 setBackFunctionality(true);
-<<<<<<< HEAD
-            }
-            if (mLockPatternView != null) {
-                mLockPatternView.setEnabled(true);
-=======
->>>>>>> android-5.1.0_r1
             }
         }
     }
@@ -745,10 +702,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     private void fakeUnlockAttempt(View postingView) {
-<<<<<<< HEAD
-=======
         beginAttempt();
->>>>>>> android-5.1.0_r1
         postingView.postDelayed(mFakeUnlockAttemptRunnable, FAKE_ATTEMPT_DELAY);
     }
 
@@ -930,10 +884,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             setBackFunctionality(false);
 
             if (password.length() >= LockPatternUtils.MIN_LOCK_PATTERN_SIZE) {
-<<<<<<< HEAD
-                Log.d(TAG, "Attempting to send command to decrypt");
-=======
->>>>>>> android-5.1.0_r1
                 new DecryptTask().execute(password);
             } else {
                 // Allow user to make as many of these as they want.
