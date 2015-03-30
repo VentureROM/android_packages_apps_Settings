@@ -105,6 +105,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private ComponentName mSuppressor;
     private int mRingerMode = -1;
 
+    private SwitchPreference mVolumeLinkNotificationSwitch;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,9 +129,11 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         initVolumePreference(KEY_ALARM_VOLUME, AudioManager.STREAM_ALARM,
                 com.android.internal.R.drawable.ic_audio_alarm_mute);
         if (mVoiceCapable) {
-            mRingOrNotificationPreference =
+            mRingPreference =
                     initVolumePreference(KEY_RING_VOLUME, AudioManager.STREAM_RING,
                             com.android.internal.R.drawable.ic_audio_ring_notif_mute);
+            mVolumeLinkNotificationSwitch = (SwitchPreference)
+                    volumes.findPreference(KEY_VOLUME_LINK_NOTIFICATION);
         } else {
             sound.removePreference(sound.findPreference(KEY_RING_VOLUME));
             sound.removePreference(sound.findPreference(KEY_VOLUME_LINK_NOTIFICATION));
@@ -205,11 +209,12 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         final ComponentName suppressor = NotificationManager.from(mContext).getEffectsSuppressor();
         if (Objects.equals(suppressor, mSuppressor)) return;
         mSuppressor = suppressor;
-        if (mRingOrNotificationPreference != null) {
+        if (mRingPreference != null && mNotificationPreference != null) {
             final String text = suppressor != null ?
                     mContext.getString(com.android.internal.R.string.muted_by,
                             getSuppressorCaption(suppressor)) : null;
-            mRingOrNotificationPreference.setSuppressionText(text);
+            mRingPreference.setSuppressionText(text);
+            mNotificationPreference.setSuppressionText(text);
         }
         updateRingOrNotificationPreference();
     }
@@ -462,8 +467,14 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
                     Settings.Secure.VOLUME_LINK_NOTIFICATION, 1) == 1;
 
             if (mNotificationPreference != null) {
-                boolean show = !enabled;
-                mNotificationPreference.setEnabled(show);
+                mNotificationPreference.setEnabled(!enabled);
+                if (enabled) {
+                    updateEffectsSuppressor();
+                }
+            }
+
+            if (mVolumeLinkNotificationSwitch != null){
+                mVolumeLinkNotificationSwitch.setChecked(enabled);
             }
         }
     }
