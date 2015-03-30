@@ -48,6 +48,7 @@ import android.provider.OpenableColumns;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.SwitchPreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -133,7 +134,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
                     initVolumePreference(KEY_RING_VOLUME, AudioManager.STREAM_RING,
                             com.android.internal.R.drawable.ic_audio_ring_notif_mute);
             mVolumeLinkNotificationSwitch = (SwitchPreference)
-                    volumes.findPreference(KEY_VOLUME_LINK_NOTIFICATION);
+                    sound.findPreference(KEY_VOLUME_LINK_NOTIFICATION);
         } else {
             sound.removePreference(sound.findPreference(KEY_RING_VOLUME));
             sound.removePreference(sound.findPreference(KEY_VOLUME_LINK_NOTIFICATION));
@@ -459,8 +460,9 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     }
 
     private void updateNotificationPreferenceState() {
-        mNotificationPreference = initVolumePreference(KEY_NOTIFICATION_VOLUME,
-                AudioManager.STREAM_NOTIFICATION);
+        mNotificationPreference = 
+                initVolumePreference(KEY_NOTIFICATION_VOLUME, AudioManager.STREAM_NOTIFICATION,
+                        com.android.internal.R.drawable.ic_audio_ring_notif_mute);
 
         if (mVoiceCapable) {
             final boolean enabled = Settings.System.getInt(getContentResolver(),
