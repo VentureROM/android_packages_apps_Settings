@@ -298,4 +298,10 @@
     
     <!-- Restart SystemUI -->
     <string name="restart_systemui">Restart SystemUI</string>
+
+    <!-- Miscellaneous string -->
+    <string name="profiles_add">Add</string>
+    <string name="profile_reset_title">Reset</string>
+    <string name="profile_choose_app">Choose app</string>
+
 </resources>
