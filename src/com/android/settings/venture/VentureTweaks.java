@@ -26,6 +26,7 @@ public class VentureTweaks extends SettingsPreferenceFragment {
 
     private static final String KEY_LOCK_CLOCK = "lock_clock";
     private static final String KEY_LOCK_CLOCK_PACKAGE_NAME = "com.cyanogenmod.lockclock";
+    private static final String KEY_NIGHT_MODE = "night_mode_pref";
 
     private PreferenceScreen mLockClock;
 

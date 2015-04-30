@@ -26,6 +26,10 @@
     <!-- Generic strings -->
     <string name="general">General</string>
 
+    <!-- Night Mode Settings -->
+    <string name="night_mode_pref_title">System Night Mode</string>
+    <string name="night_mode_pref_summary">Applies system-wide night theme (third-party apps may take advantage of this preference by including alternate layout resource files beginning with "night_")</string>
+
     <!-- Statusbar settings -->
     <string name="status_bar_title">Status bar</string>
     <string name="status_bar_summary">Change various status bar options including battery styles</string>

@@ -39,4 +39,10 @@
             android:targetClass="com.cyanogenmod.lockclock.preference.Preferences" />
     </PreferenceScreen>
 
+    <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+        android:key="night_mode_pref"
+        android:title="@string/night_mode_pref_title"
+        android:summary="@string/night_mode_pref_summary"
+        android:defaultValue="false" />
+
 </PreferenceScreen>
